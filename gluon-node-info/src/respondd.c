@@ -93,6 +93,26 @@ static struct json_object * get_location(struct uci_context *ctx, struct uci_pac
 	return ret;
 }
 
+static struct json_object * get_advanced_stats(struct uci_context *ctx, struct uci_package *p) {
+	struct json_object *store_stats;
+	struct uci_section *s = get_first_section(p, "advanced-stats");
+	if (!s)
+		return NULL;
+
+	const char *store = uci_lookup_option_string(ctx, s, "store_stats");
+
+	struct json_object *ret = json_object_new_object();
+
+	if (!store || strcmp(store, "1"))
+		store_stats = json_object_new_boolean(0);
+	else
+		store_stats = json_object_new_boolean(1);
+
+	json_object_object_add(ret, "store-stats", store_stats);
+
+	return ret;
+}
+
 static struct json_object * get_owner(struct uci_context *ctx, struct uci_package *p) {
 	const char *contact = get_first_option(ctx, p, "owner", "contact");
 	if (!contact || !*contact)
@@ -124,6 +144,10 @@ static struct json_object * respondd_provider_nodeinfo(void) {
 		struct json_object *location = get_location(ctx, p);
 		if (location)
 			json_object_object_add(ret, "location", location);
+
+		struct json_object *advanced_stats = get_advanced_stats(ctx, p);
+		if (advanced_stats)
+			json_object_object_add(ret, "advanced-stats", advanced_stats);
 
 		struct json_object *owner = get_owner(ctx, p);
 		if (owner)
