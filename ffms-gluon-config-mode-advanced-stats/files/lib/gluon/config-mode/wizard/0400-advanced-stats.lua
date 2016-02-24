@@ -12,7 +12,7 @@ function M.section(form)
 
   local o
 
-  o = s:option(cbi.Flag, "_stats", i18n.translate("Store advanced stats."))
+  o = s:option(cbi.Flag, "_stats", i18n.translate("Store advanced stats"))
   o.default = uci:get_first("gluon-node-info", "advanced-stats", "store_stats", o.disabled)
   o.rmempty = false
 
@@ -20,8 +20,10 @@ end
 
 function M.handle(data)
   local sname = uci:get_first("gluon-node-info", "advanced-stats")
-
-  uci:set("gluon-node-info", sname, "store_stats", data._location)
+  if sname == nil then
+    sname = uci:add("gluon-node-info", "advanced-stats")
+  end
+  uci:set("gluon-node-info", sname, "store_stats", data._stats)
   uci:save("gluon-node-info")
   uci:commit("gluon-node-info")
 end

@@ -6,5 +6,5 @@ msgid ""
 "check this checkbox."
 msgstr ""
 
-msgid "Store advanced stats."
+msgid "Store advanced stats"
 msgstr ""
