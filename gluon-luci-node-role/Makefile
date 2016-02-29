@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=gluon-luci-node-role
+PKG_NAME:=ffms-gluon-luci-node-role
 PKG_VERSION:=0.1
 PKG_RELEASE:=1
 
@@ -10,10 +10,10 @@ include $(GLUONDIR)/include/package.mk
 
 PKG_CONFIG_DEPENDS += $(GLUON_I18N_CONFIG)
 
-define Package/gluon-luci-node-role
+define Package/ffms-gluon-luci-node-role
   SECTION:=gluon
   CATEGORY:=Gluon
-  DEPENDS:=+gluon-luci-admin +gluon-node-info
+  DEPENDS:=+gluon-luci-admin +ffms-gluon-node-info
   TITLE:=UI for specifying node role
 endef
 
@@ -25,17 +25,17 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(call GluonBuildI18N,gluon-luci-node-role,i18n)
+	$(call GluonBuildI18N,ffms-gluon-luci-node-role,i18n)
 endef
 
-define Package/gluon-luci-node-role/install
+define Package/ffms-gluon-luci-node-role/install
 	$(CP) ./files/* $(1)/
-	$(call GluonInstallI18N,gluon-luci-node-role,$(1))
+	$(call GluonInstallI18N,ffms-gluon-luci-node-role,$(1))
 endef
 
-define Package/gluon-luci-node-role/postinst
+define Package/ffms-gluon-luci-node-role/postinst
 #!/bin/sh
 $(call GluonCheckSite,check_site.lua)
 endef
 
-$(eval $(call BuildPackage,gluon-luci-node-role))
+$(eval $(call BuildPackage,ffms-gluon-luci-node-role))

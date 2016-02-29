@@ -14,7 +14,7 @@ define Package/ffms-gluon-config-mode-advanced-stats
   SECTION:=gluon
   CATEGORY:=Gluon
   TITLE:=Set geographic location of a node
-  DEPENDS:=gluon-config-mode-core-virtual +gluon-node-info
+  DEPENDS:=gluon-config-mode-core-virtual +ffms-gluon-node-info
 endef
 
 define Build/Prepare
