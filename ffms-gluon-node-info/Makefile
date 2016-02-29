@@ -1,8 +1,10 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=gluon-node-info
-PKG_VERSION:=2
+PKG_NAME:=ffms-gluon-node-info
+PKG_VERSION:=1
 PKG_RELEASE:=1
+
+PROVIDES:=gluon-node-info
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 PKG_BUILD_DEPENDS := respondd
